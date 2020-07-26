@@ -1,0 +1,62 @@
+{
+  "npmScope": "vakt-web",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "commodity": {
+      "tags": ["scope:project"],
+      "implicitDependencies": ["shared-assets"]
+    },
+    "commodity-e2e": {
+      "tags": ["scope:project"],
+      "implicitDependencies": ["commodity"]
+    },
+    "shared-ui": {
+      "tags": ["scope:ui"]
+    },
+    "logistics-feature-planner": {
+      "tags": ["scope:feature"]
+    },
+    "logistics-feature-planner-e2e": {
+      "tags": ["scope:project"],
+      "implicitDependencies": ["logistics-feature-planner"]
+    },
+    "logistics-data-access": {
+      "tags": ["scope:data-access"]
+    },
+    "logistics-feature-movement": {
+      "tags": ["scope:feature"]
+    },
+    "logistics-feature-open-commitment": {
+      "tags": ["scope:feature"]
+    },
+    "shared-assets": {
+      "tags": ["scope:util"]
+    }
+  }
+}

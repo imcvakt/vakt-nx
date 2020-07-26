@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "projects": {
+    "commodity": {
+      "root": "apps/commodity",
+      "sourceRoot": "apps/commodity/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/commodity",
+            "index": "apps/commodity/src/index.html",
+            "main": "apps/commodity/src/main.tsx",
+            "polyfills": "apps/commodity/src/polyfills.ts",
+            "tsConfig": "apps/commodity/tsconfig.app.json",
+            "assets": [
+              "apps/commodity/src/favicon.ico",
+              "apps/commodity/src/assets",
+              {
+                "input": "libs/shared/assets/src",
+                "glob": "**/*",
+                "output": "assets"
+              }
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/commodity/src/environments/environment.ts",
+                  "with": "apps/commodity/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "commodity:build",
+            "proxyConfig": "apps/commodity/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "commodity:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/commodity/tsconfig.app.json",
+              "apps/commodity/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/commodity/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/commodity/jest.config.js",
+            "tsConfig": "apps/commodity/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "commodity-e2e": {
+      "root": "apps/commodity-e2e",
+      "sourceRoot": "apps/commodity-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/commodity-e2e/cypress.json",
+            "tsConfig": "apps/commodity-e2e/tsconfig.e2e.json",
+            "devServerTarget": "commodity:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "commodity:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/commodity-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/commodity-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "shared-ui": {
+      "root": "libs/shared/ui",
+      "sourceRoot": "libs/shared/ui/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/ui/tsconfig.lib.json",
+              "libs/shared/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/ui/jest.config.js",
+            "tsConfig": "libs/shared/ui/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "logistics-feature-planner": {
+      "root": "libs/logistics/feature-planner",
+      "sourceRoot": "libs/logistics/feature-planner/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/logistics/feature-planner/tsconfig.lib.json",
+              "libs/logistics/feature-planner/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/logistics/feature-planner/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logistics/feature-planner/jest.config.js",
+            "tsConfig": "libs/logistics/feature-planner/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/logistics/feature-planner/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/logistics-feature-planner",
+            "config": {
+              "configFolder": "libs/logistics/feature-planner/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "logistics-feature-planner-e2e": {
+      "root": "apps/logistics-feature-planner-e2e",
+      "sourceRoot": "apps/logistics-feature-planner-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/logistics-feature-planner-e2e/cypress.json",
+            "tsConfig": "apps/logistics-feature-planner-e2e/tsconfig.e2e.json",
+            "devServerTarget": "logistics-feature-planner:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "logistics-feature-planner:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/logistics-feature-planner-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/logistics-feature-planner-e2e/**/*"
+            ]
+          }
+        }
+      }
+    },
+    "logistics-data-access": {
+      "root": "libs/logistics/data-access",
+      "sourceRoot": "libs/logistics/data-access/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/logistics/data-access/tsconfig.lib.json",
+              "libs/logistics/data-access/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/logistics/data-access/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logistics/data-access/jest.config.js",
+            "tsConfig": "libs/logistics/data-access/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "logistics-feature-movement": {
+      "root": "libs/logistics/feature-movement",
+      "sourceRoot": "libs/logistics/feature-movement/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/logistics/feature-movement/tsconfig.lib.json",
+              "libs/logistics/feature-movement/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/logistics/feature-movement/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logistics/feature-movement/jest.config.js",
+            "tsConfig": "libs/logistics/feature-movement/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "logistics-feature-open-commitment": {
+      "root": "libs/logistics/feature-open-commitment",
+      "sourceRoot": "libs/logistics/feature-open-commitment/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/logistics/feature-open-commitment/tsconfig.lib.json",
+              "libs/logistics/feature-open-commitment/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/logistics/feature-open-commitment/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logistics/feature-open-commitment/jest.config.js",
+            "tsConfig": "libs/logistics/feature-open-commitment/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-assets": {
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/shared/assets/tsconfig.lib.json",
+              "libs/shared/assets/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/assets/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/assets/jest.config.js",
+            "tsConfig": "libs/shared/assets/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint",
+        "babel": true
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      },
+      "component": {
+        "style": "styled-components"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "commodity"
+}
