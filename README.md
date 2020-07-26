@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/87f97e1b-82e6-4241-a546-a596e133a41b/deploy-status)](https://app.netlify.com/sites/vakt/deploys)
+
 # VaktWeb
 
 This project was generated using [Nx](https://nx.dev).
