@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Toolbar } from '@vakt-web/shared/ui';
+import { Toolbar, Button } from '@vakt-web/shared/ui';
 
 import { InspectionsPanel } from './inspections-panel/inspections-panel';
 import { TradesPanel } from './trades-panel/trades-panel';
@@ -67,10 +67,22 @@ export const LogisticsFeaturePlanner = (
       </Tabs>
 
       <Toolbar title="Toolbar">
-        <button>Move Existing Nom</button>
-        <button>Split into New Nom</button>
-        <button>Save Draft</button>
-        <button>Delete Noms</button>
+        <Button size="auto" color="transparent">
+          <img width={16} height={16} src="assets/move.svg" alt="Move Existing Nomination" />
+          Move Existing Nom
+        </Button>
+        <Button size="auto" color="transparent">
+          <img width={16} height={16} src="assets/split-nomination.svg" alt="Move Existing Nomination" />
+          Split into New Nom
+        </Button>
+        <Button size="auto" color="transparent">
+          <img width={16} height={16} src="assets/send-nomination.svg" alt="Move Existing Nomination" />
+          Save Draft
+        </Button>
+        <Button size="auto" color="transparent">
+          <img width={16} height={16} src="assets/delete.svg" alt="Move Existing Nomination" />
+          Delete Noms
+        </Button>
       </Toolbar>
 
       {availablePanels[activePanel]}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Toolbar } from '@vakt-web/shared/ui';
+import { Toolbar, Button } from '@vakt-web/shared/ui';
 import { OpenCommitment } from '@vakt-web/logistics/data-access';
 import { useFetch } from '@vakt-web/logistics/data-access';
 import { OpenCommitmentTable } from './open-commitment-table/open-commitment-table';
@@ -22,9 +22,9 @@ export const LogisticsFeatureOpenCommitment = (
     <>
       <Toolbar title="Open Commitments">
         <Link to="logistics-movements">
-          <button style={{ color: '#FFF', border: 'none', width: '129px', height: '41px', background: '#399BF8'}}>
+          <Button>
             New Movement
-          </button>
+          </Button>
         </Link>
       </Toolbar>
       <OpenCommitmentTable data={data} />

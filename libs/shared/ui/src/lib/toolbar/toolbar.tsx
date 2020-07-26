@@ -41,7 +41,7 @@ const StyledToolbarActions = styled.div`
   opacity: 1;
 
   button {
-    margin-right: 8px;
+    margin-right: 32px;
   }
 `;
 
