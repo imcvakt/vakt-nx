@@ -21,6 +21,8 @@ const StyledTable = styled.div`
     border: 1px solid black;
 
     width: 100%;
+    table-layout: fixed;
+    word-break: break-word;
 
     tr {
       :last-child {
