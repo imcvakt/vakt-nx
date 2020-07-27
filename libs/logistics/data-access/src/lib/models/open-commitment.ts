@@ -9,5 +9,7 @@ export interface ContractDetails {
 
 export interface OpenCommitment {
   id: string;
+  movementTransferId?: string;
+  nominationId?: string;
   contractDetails: ContractDetails
 }

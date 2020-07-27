@@ -1,5 +1,6 @@
-export const movements = 'movements';
-export const movementTransfers = 'movement-transfers';
-export const buildDraws = 'build-draws';
-export const parcels = 'parcels';
-export const nominations = 'nominations';
+export const URL = {
+  movements: 'movements',
+  buildDraws: 'build-draws',
+  nominations: 'nominations',
+  openCommitments: 'open-commitments'
+}

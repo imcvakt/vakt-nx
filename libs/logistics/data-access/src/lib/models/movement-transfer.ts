@@ -4,6 +4,7 @@ export enum MovementTransferType {
 
 export interface MovementTransfer {
   id: string;
+  movementId: string;
   data: string;
   type: MovementTransferType
 }
