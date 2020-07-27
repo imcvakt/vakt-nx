@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { Header } from '@vakt-web/shared/ui';
+import { Header, Footer } from '@vakt-web/shared/ui';
 
 import { Routes } from './routes/routes';
 
@@ -43,9 +43,9 @@ export const App = () => {
         <Routes />
       </Content>
 
-      <footer>
+      <Footer>
         <p>VAKT Global Ltd</p>
-      </footer>
+      </Footer>
     </>
   );
 };
