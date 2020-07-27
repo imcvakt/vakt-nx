@@ -8,7 +8,10 @@ export function useFetch<Data = unknown, Error = unknown>(url: string) {
       const response = await api.get(url);
       return response.data;
     },
-    {revalidateOnFocus: false}
+    {
+      revalidateOnFocus: true,
+      onError: (e) => alert(e)
+    }
   );
 
   return { data, error, mutate };
