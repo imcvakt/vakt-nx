@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useLogistics } from '@vakt-web/logistics/data-access';
 
 interface Props<ObjectType> {
   object: ObjectType;
@@ -7,7 +6,8 @@ interface Props<ObjectType> {
     key: number | symbol | string,
     title: string,
   }[];
-  onSelectRow?: (rowSelected: ObjectType) => void
+  onSelectRow?: (rowSelected: ObjectType) => void,
+  selectedRows: string[]
 }
 
 // TODO: util lib
@@ -20,13 +20,12 @@ function getValue(object, path) {
 }
 
 export function Row<ObjectType extends { id: string }>(
-  { object, properties, onSelectRow }: Props<ObjectType>
+  { object, properties, onSelectRow, selectedRows }: Props<ObjectType>
 ) {
-  const {state} = useLogistics();
 
   const isSelected = useMemo(() => {
-    return !!state.openCommitments.find(openCommitment => openCommitment.id === object.id);
-  }, [state.openCommitments, object]);
+    return selectedRows.includes(object.id);
+  }, [object, selectedRows]);
 
   return (
     <tr>

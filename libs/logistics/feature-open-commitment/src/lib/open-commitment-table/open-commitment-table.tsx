@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { OpenCommitment, useLogistics, Types } from '@vakt-web/logistics/data-access';
 import { Table } from '@vakt-web/shared/ui';
@@ -8,7 +8,9 @@ export interface OpenCommitmentTableProps {
 }
 
 export const OpenCommitmentTable = ({ data }: OpenCommitmentTableProps) => {
-  const {dispatch} = useLogistics();
+  const {state, dispatch} = useLogistics();
+
+  const selectedIds = useMemo(() => state.openCommitments.map(openCommitment => openCommitment.id), [state.openCommitments]);
 
   const handleSelect = useCallback((openCommitment) => {
     dispatch({type: Types.ToggleSelection, payload: openCommitment});
@@ -18,6 +20,7 @@ export const OpenCommitmentTable = ({ data }: OpenCommitmentTableProps) => {
     <Table<OpenCommitment>
       onSelectRow={handleSelect}
       objects={data}
+      selectedRows={selectedIds}
       properties={[
         { key: 'contractDetails.creator', title: 'Creator' },
         { key: 'contractDetails.customerTradeId', title: 'Customer Trade Id' },

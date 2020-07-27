@@ -10,7 +10,8 @@ interface Props<ObjectType> {
     key: number | symbol | string,
     title: string,
   }[];
-  onSelectRow?: (rowSelected: ObjectType) => void
+  onSelectRow?: (rowSelected: ObjectType) => void,
+  selectedRows: string[],
 }
 
 const StyledTable = styled.div`
@@ -47,7 +48,7 @@ const StyledTable = styled.div`
 `;
 
 export function Table<ObjectType extends { id: string }>(
-  { objects, properties, onSelectRow }: PropsWithChildren<Props<ObjectType>>,
+  { objects, properties, onSelectRow, selectedRows }: PropsWithChildren<Props<ObjectType>>,
 ) {
 
   if(onSelectRow) {
@@ -65,6 +66,7 @@ export function Table<ObjectType extends { id: string }>(
             objects.map((object, i) => (
               <Row
                 onSelectRow={onSelectRow}
+                selectedRows={selectedRows}
                 key={i}
                 object={object}
                 properties={properties}

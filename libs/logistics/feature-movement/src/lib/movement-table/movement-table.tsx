@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useLogistics, OpenCommitment } from '@vakt-web/logistics/data-access';
 import { Table } from '@vakt-web/shared/ui';
@@ -9,9 +9,12 @@ export interface MovementTableProps {}
 export const MovementTable = (props: MovementTableProps) => {
   const {state} = useLogistics();
 
+  const selectedIds = useMemo(() => state.openCommitments.map(openCommitment => openCommitment.id), [state.openCommitments]);
+
   return (
     <Table<OpenCommitment>
       objects={state.openCommitments}
+      selectedRows={selectedIds}
       properties={[
         { key: 'contractDetails.creator', title: 'Creator' },
         { key: 'contractDetails.customerTradeId', title: 'Customer Trade Id' },

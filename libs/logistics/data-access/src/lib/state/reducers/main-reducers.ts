@@ -8,6 +8,10 @@ export interface InitialStateType {
   openCommitments: OpenCommitment[];
 };
 
+export const initialState: InitialStateType = {
+  openCommitments: [],
+};
+
 export const mainReducer = (
   { openCommitments }: InitialStateType,
   action: OpenCommitmentActions
