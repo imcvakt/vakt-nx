@@ -1,17 +1,19 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { PrimaryButton } from './button.style';
 
 /* eslint-disable-next-line */
-export interface ButtonProps {
+interface AdditionalButtonProps {
   children: ReactNode,
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void,
+  // onClick?: (e: React.MouseEvent<HTMLInputElement>) => void,
   color?: 'primary' | 'secondary' | 'transparent',
   variant?: 'contained' | 'outlined',
   size?: 'large' | 'medium' | 'outlined' | 'auto'
 }
 
-export const Button = ({children, onClick, color = 'primary', variant = 'contained', size='medium'}: ButtonProps) => {
+export type ButtonProps = AdditionalButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
+
+export const Button = ({children, color = 'primary', variant = 'contained', size='medium', ...rest}: ButtonProps) => {
   let C;
 
   switch (color) {
@@ -22,10 +24,10 @@ export const Button = ({children, onClick, color = 'primary', variant = 'contain
 
   return (
     <C
-      onClick={onClick}
       color={color}
       variant={variant}
-      size={size}>
+      size={size}
+      {...rest}>
       {children}
     </C>
   );

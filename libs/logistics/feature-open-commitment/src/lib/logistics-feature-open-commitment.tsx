@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Toolbar, Button } from '@vakt-web/shared/ui';
-import { OpenCommitment } from '@vakt-web/logistics/data-access';
+import { OpenCommitment, useLogistics } from '@vakt-web/logistics/data-access';
 import { useFetch } from '@vakt-web/logistics/data-access';
 import { OpenCommitmentTable } from './open-commitment-table/open-commitment-table';
 
@@ -12,6 +12,8 @@ export interface LogisticsFeatureOpenCommitmentProps {}
 export const LogisticsFeatureOpenCommitment = (
   props: LogisticsFeatureOpenCommitmentProps
 ) => {
+  const { state } = useLogistics();
+  const emptySelection = useMemo(() => !state.openCommitments.length, [state.openCommitments.length]);
   const { data } = useFetch<OpenCommitment[]>('open-commitments');
 
   if(!data) {
@@ -22,7 +24,7 @@ export const LogisticsFeatureOpenCommitment = (
     <>
       <Toolbar title="Open Commitments">
         <Link to="logistics-movements">
-          <Button>
+          <Button disabled={emptySelection}>
             New Movement
           </Button>
         </Link>
