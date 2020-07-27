@@ -46,6 +46,7 @@ export const Header = (props: HeaderProps) => {
           <User>
             <Text>Anne Marie</Text>
             <img src="assets/user-avatar.png" width={50} height={50} alt="User Avatar" />
+            <img src="assets/menu.svg" width={24} height={24} alt="Resync data" />
           </User>
         </Actions>
       </Content>
