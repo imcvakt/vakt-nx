@@ -12,7 +12,7 @@ export interface LogisticsFeatureOpenCommitmentProps {}
 export const LogisticsFeatureOpenCommitment = (
   props: LogisticsFeatureOpenCommitmentProps
 ) => {
-  const { state } = useLogistics();
+  const [state] = useLogistics();
   const emptySelection = useMemo(() => !state.openCommitments.length, [state.openCommitments.length]);
   const { data } = useFetch<OpenCommitment[]>(URL.openCommitments);
 

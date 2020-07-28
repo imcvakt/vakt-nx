@@ -11,7 +11,7 @@ export interface LogisticsFeatureMovementProps {}
 export const LogisticsFeatureMovement = (
   props: LogisticsFeatureMovementProps
 ) => {
-  const { state } = useLogistics();
+  const [state] = useLogistics();
   const emptySelection = useMemo(() => !state.openCommitments.length, [state.openCommitments.length]);
   return (
     <>

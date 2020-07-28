@@ -10,7 +10,7 @@ interface Props<ObjectType> {
     key: number | symbol | string,
     title: string,
   }[];
-  onSelectRow?: (rowSelected: ObjectType) => void,
+  onSelectRow?: (rowSelected: ObjectType, isSelected: boolean) => void,
   selectedRows: string[],
 }
 

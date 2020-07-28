@@ -7,7 +7,7 @@ import { Table } from '@vakt-web/shared/ui';
 export interface MovementTableProps {}
 
 export const MovementTable = (props: MovementTableProps) => {
-  const {state} = useLogistics();
+  const [state] = useLogistics();
 
   const selectedIds = useMemo(() => state.openCommitments.map(openCommitment => openCommitment.id), [state.openCommitments]);
 

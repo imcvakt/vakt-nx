@@ -1,7 +1,4 @@
-import {
-  openCommitmentReducer,
-  OpenCommitmentActions
-} from "./open-commitment";
+import { openCommitmentReducer, OpenCommitmentActions } from "./open-commitment";
 import { OpenCommitment } from '../../models';
 
 export interface InitialStateType {
@@ -12,7 +9,7 @@ export const initialState: InitialStateType = {
   openCommitments: [],
 };
 
-export const mainReducer = (
+export const rootReducer = (
   { openCommitments }: InitialStateType,
   action: OpenCommitmentActions
 ) => ({

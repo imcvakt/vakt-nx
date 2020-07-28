@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { OpenCommitment, useLogistics, Types } from '@vakt-web/logistics/data-access';
+import { OpenCommitment, useLogistics } from '@vakt-web/logistics/data-access';
 import { Table } from '@vakt-web/shared/ui';
 
 export interface OpenCommitmentTableProps {
@@ -8,12 +8,13 @@ export interface OpenCommitmentTableProps {
 }
 
 export const OpenCommitmentTable = ({ data }: OpenCommitmentTableProps) => {
-  const {state, dispatch} = useLogistics();
+  const [state, dispatch] = useLogistics();
 
   const selectedIds = useMemo(() => state.openCommitments.map(openCommitment => openCommitment.id), [state.openCommitments]);
 
-  const handleSelect = useCallback((openCommitment) => {
-    dispatch({type: Types.ToggleSelection, payload: openCommitment});
+  const handleSelect = useCallback((openCommitment, isSelected) => {
+    const action = isSelected ? 'RemoveSelection' : 'AddSelection';
+    dispatch({type: action, payload: openCommitment});
   }, [dispatch]);
 
   return (

@@ -6,7 +6,7 @@ interface Props<ObjectType> {
     key: number | symbol | string,
     title: string,
   }[];
-  onSelectRow?: (rowSelected: ObjectType) => void,
+  onSelectRow?: (rowSelected: ObjectType, isSelected: boolean) => void,
   selectedRows: string[]
 }
 
@@ -33,7 +33,7 @@ export function Row<ObjectType extends { id: string }>(
         properties.map((property, i) => {
           if(i === 0 && onSelectRow) {
             return (
-              <td key={i}><input type="checkbox" defaultChecked={isSelected} onClick={() => onSelectRow(object)} /></td>
+              <td key={i}><input type="checkbox" defaultChecked={isSelected} onClick={() => onSelectRow(object, isSelected)} /></td>
             );
           }
           return (

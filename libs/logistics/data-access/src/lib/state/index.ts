@@ -1,2 +1,1 @@
-export * from './reducers/open-commitment';
-export * from './reducers/main-reducers';
+export * from './reducers/combined-reducers';
