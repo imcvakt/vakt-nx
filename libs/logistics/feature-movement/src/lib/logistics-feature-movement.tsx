@@ -18,7 +18,7 @@ export const LogisticsFeatureMovement = (
       <Toolbar title="Movement">
         <Link to="logistics-nominations">
           <Button disabled={emptySelection}>
-            Nomination
+            Manage Nomination
           </Button>
         </Link>
       </Toolbar>

@@ -25,7 +25,7 @@ export interface RoutesProps {}
 export const Routes = (props: RoutesProps) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Route path="/" exact component={() => <><h1>Home</h1><p>Bart :)</p></>} />
+      <Route path="/" exact component={() => <><h1>Home</h1><p>Do something cool here :)</p></>} />
       <LogisticsProvider>
         <Route path="/logistics-home" component={LogisticsFeatureOpenCommitment} />
         <Route path="/logistics-movements" component={LogisticsFeatureMovement} />
