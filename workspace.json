@@ -73,7 +73,10 @@
               "apps/commodity/tsconfig.app.json",
               "apps/commodity/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/commodity/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/commodity/**/*"
+            ]
           }
         },
         "test": {
@@ -108,8 +111,13 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "tsConfig": ["apps/commodity-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/commodity-e2e/**/*"]
+            "tsConfig": [
+              "apps/commodity-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/commodity-e2e/**/*"
+            ]
           }
         }
       }
@@ -128,7 +136,10 @@
               "libs/shared/ui/tsconfig.lib.json",
               "libs/shared/ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/ui/**/*"
+            ]
           }
         },
         "test": {
@@ -338,7 +349,10 @@
               "libs/shared/assets/tsconfig.lib.json",
               "libs/shared/assets/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/assets/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/assets/**/*"
+            ]
           }
         },
         "test": {
@@ -365,7 +379,10 @@
               "libs/logistics/ui/tsconfig.lib.json",
               "libs/logistics/ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/logistics/ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/logistics/ui/**/*"
+            ]
           }
         },
         "test": {
@@ -374,6 +391,68 @@
             "jestConfig": "libs/logistics/ui/jest.config.js",
             "tsConfig": "libs/logistics/ui/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/logistics/ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/logistics-ui",
+            "config": {
+              "configFolder": "libs/logistics/ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "logistics-ui-e2e": {
+      "root": "apps/logistics-ui-e2e",
+      "sourceRoot": "apps/logistics-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/logistics-ui-e2e/cypress.json",
+            "tsConfig": "apps/logistics-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "logistics-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "logistics-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/logistics-ui-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/logistics-ui-e2e/**/*"
+            ]
           }
         }
       }

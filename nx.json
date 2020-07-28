@@ -29,37 +29,69 @@
   },
   "projects": {
     "commodity": {
-      "tags": ["scope:project"],
-      "implicitDependencies": ["shared-assets"]
+      "tags": [
+        "scope:project"
+      ],
+      "implicitDependencies": [
+        "shared-assets"
+      ]
     },
     "commodity-e2e": {
-      "tags": ["scope:project"],
-      "implicitDependencies": ["commodity"]
+      "tags": [
+        "scope:project"
+      ],
+      "implicitDependencies": [
+        "commodity"
+      ]
     },
     "shared-ui": {
-      "tags": ["scope:ui"]
+      "tags": [
+        "scope:ui"
+      ]
     },
     "logistics-feature-planner": {
-      "tags": ["scope:feature"]
+      "tags": [
+        "scope:feature"
+      ]
     },
     "logistics-feature-planner-e2e": {
-      "tags": ["scope:project"],
-      "implicitDependencies": ["logistics-feature-planner"]
+      "tags": [
+        "scope:project"
+      ],
+      "implicitDependencies": [
+        "logistics-feature-planner"
+      ]
     },
     "logistics-data-access": {
-      "tags": ["scope:data-access"]
+      "tags": [
+        "scope:data-access"
+      ]
     },
     "logistics-feature-movement": {
-      "tags": ["scope:feature"]
+      "tags": [
+        "scope:feature"
+      ]
     },
     "logistics-feature-open-commitment": {
-      "tags": ["scope:feature"]
+      "tags": [
+        "scope:feature"
+      ]
     },
     "shared-assets": {
-      "tags": ["scope:util"]
+      "tags": [
+        "scope:util"
+      ]
     },
     "logistics-ui": {
-      "tags": ["scope:ui"]
+      "tags": [
+        "scope:ui"
+      ]
+    },
+    "logistics-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "logistics-ui"
+      ]
     }
   }
 }

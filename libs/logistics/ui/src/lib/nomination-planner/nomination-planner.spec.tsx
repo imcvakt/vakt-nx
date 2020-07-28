@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Planner from './planner';
+import NominationPlanner from './nomination-planner';
 
-describe(' Planner', () => {
+describe(' NominationPlanner', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Planner />);
+    const { baseElement } = render(<NominationPlanner />);
     expect(baseElement).toBeTruthy();
   });
 });
