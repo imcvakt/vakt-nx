@@ -350,6 +350,33 @@
           }
         }
       }
+    },
+    "logistics-ui": {
+      "root": "libs/logistics/ui",
+      "sourceRoot": "libs/logistics/ui/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/logistics/ui/tsconfig.lib.json",
+              "libs/logistics/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/logistics/ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logistics/ui/jest.config.js",
+            "tsConfig": "libs/logistics/ui/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
