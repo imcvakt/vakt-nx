@@ -32,11 +32,25 @@ export const TradesPanel = (props: TradesPanelProps) => {
     {item: 'Timestamp', value: '-'}
   ];
 
-  const openCommitments = {
-    headers: [
-      '',
-      'Counterparty Trade Creator',
-      'Quantity UoM',
+  const openCommitmentsHeader = [
+    '',
+    'Counterparty Trade Creator',
+    'Quantity UoM',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+  ];
+
+  const openCommitments = [
+    [
+      'parcel',
+      'Gunvor SA',
+      '4000 MMT',
       '',
       '',
       '',
@@ -45,20 +59,18 @@ export const TradesPanel = (props: TradesPanelProps) => {
       '',
       '',
       ''
-    ],
-    items: [
-      [ 'parcel', 'Gunvor SA', '4000 MMT', '', '', '', '', '', '', '', ''],
-      [ 'parcel', 'Gunvor SA', '4000 MMT', '', '', '', '', '', '', '', ''],
-      [ 'parcel', 'Gunvor SA', '4000 MMT', '', '', '', '', '', '', '', ''],
-      [ 'parcel', 'Gunvor SA', '4000 MMT', '', '', '', '', '', '', '', ''],
     ]
-  };
+  ];
+
   return (
     <>
       <StyledTitle>
         Trades
       </StyledTitle>
-      <NominationPlanner headers={headers} data={openCommitments} />
+      <NominationPlanner
+        headers={headers}
+        openCommitments={openCommitments}
+        openCommitmentsHeader={openCommitmentsHeader} />
       <StyledTitle>
         Stocks
       </StyledTitle>

@@ -5,10 +5,8 @@ import styled from 'styled-components';
 /* eslint-disable-next-line */
 export interface NominationPlannerProps {
   headers: {item: string, value: string}[],
-  data: {
-    headers: string[],
-    items: string[][],
-  }
+  openCommitmentsHeader: string[],
+  openCommitments: string[][],
 }
 
 const ActionColumn = styled.div`
@@ -46,22 +44,11 @@ const Right = styled.div`
   grid-area: 1 / 13 / 4 / 14;
 `;
 
-const Header2 = styled.div`
-  grid-area: 2 / 2 / 3 / 13;
-  background-color: #1A1A1A;
-`;
-
-const Items = styled.div<{rows: number}>`
-  grid-area: 3 / 2 / ${p => p.rows} / 13;
-`;
-
-const ColumnsFlex = styled.div`
+const HeaderItem = styled.div`
   display: flex;
-`;
 
-const ItemHead = styled.div`
-  display: flex;
   flex: 1;
+
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -79,39 +66,55 @@ const ItemHead = styled.div`
   }
 `;
 
-const ItemBody = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  color: #6D9AC4;
-
-  border-radius: 3px 3px 0px 0px;
-  background-color: #1A1A1A;
-
-  height: 30px;
+const OpenCommitmentHeader = styled.div`
+  grid-area: 2 / 2 / 3 / 13;
 `;
 
-const OpenCommitment = styled.div`
+const ColumnOpenCommitmentHeader = styled.div`
+  display: flex;
+`;
+
+const ColumnOpenCommitmentHeaderItem = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+
+  background-color: #1A1A1A;
+  font: Medium 13px/16px Helvetica Neue;
+  color: #6D9AC4;
+  opacity: 1;
+`;
+
+const Items = styled.div<{rows: number}>`
+  grid-area: 3 / 2 / 4 / 13;
+`;
+
+const ColumnOpenCommitmentItemGroup = styled.div`
+  display: flex;
+`;
+
+const ColumnOpenCommitmentItem = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
   background-color: #1A1A1A;
   margin-bottom: 8px;
-  height: 40px;
 `;
 
 const Actions = styled.div`
   display: flex;
+  flex: 1;
   justify-content: space-evenly;
 `;
 
-export const NominationPlanner = ({ headers, data }: NominationPlannerProps) => {
+export const NominationPlanner = ({ headers, openCommitments, openCommitmentsHeader }: NominationPlannerProps) => {
 
   return (
-    <Grid rows={(data.items[0].length + 2)} columns={headers.length}>
+    <Grid rows={(openCommitments.length + 2)} columns={headers.length}>
       <Left>
         <ActionColumn>
           <input type="checkbox" />
@@ -119,29 +122,29 @@ export const NominationPlanner = ({ headers, data }: NominationPlannerProps) => 
       </Left>
 
       <Header>
-        <ColumnsFlex>
+        <div style={{ display: 'flex', flex: 1}}>
           {headers.map((header, i) => (
-            <ItemHead key={i}>
+            <HeaderItem key={i}>
               <div>{header.item}</div>
               <div>{header.value}</div>
-            </ItemHead>
+            </HeaderItem>
           ))}
-        </ColumnsFlex>
+        </div>
       </Header>
 
-      <Header2>
-        <ColumnsFlex>
-          {data?.headers.map((header, i) => (
-            <ItemBody key={i}>{header}</ItemBody>
+      <OpenCommitmentHeader>
+        <ColumnOpenCommitmentHeader>
+          {openCommitmentsHeader.map((header, i) => (
+            <ColumnOpenCommitmentHeaderItem key={i}>{header}</ColumnOpenCommitmentHeaderItem>
           ))}
-        </ColumnsFlex>
-      </Header2>
+        </ColumnOpenCommitmentHeader>
+      </OpenCommitmentHeader>
 
-      <Items rows={data.items[0].length}>
-        {data?.items[0].map((item, itemIndex) => (
-          <ColumnsFlex key={itemIndex}>
-            {data?.items[0].map((subItem, subItemIndex) => (
-              <OpenCommitment key={subItemIndex}>
+      <Items rows={openCommitments.length}>
+        {openCommitments?.map((item, itemIndex) => (
+          <ColumnOpenCommitmentItemGroup key={itemIndex}>
+            {item?.map((subItem, subItemIndex) => (
+              <ColumnOpenCommitmentItem key={subItemIndex}>
                 {subItemIndex === 0 && (
                   <Actions>
                     <input type="checkbox" />
@@ -149,9 +152,9 @@ export const NominationPlanner = ({ headers, data }: NominationPlannerProps) => 
                   </Actions>
                 )}
                 {subItemIndex !== 0 && subItem}
-              </OpenCommitment>
+              </ColumnOpenCommitmentItem>
             ))}
-          </ColumnsFlex>
+          </ColumnOpenCommitmentItemGroup>
         ))}
       </Items>
 
