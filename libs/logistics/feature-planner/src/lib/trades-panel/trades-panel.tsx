@@ -32,7 +32,7 @@ export const TradesPanel = (props: TradesPanelProps) => {
     {item: 'Timestamp', value: '-'}
   ];
 
-  const openCommitmentsHeader = [
+  const subHeaders = [
     '',
     'Counterparty Trade Creator',
     'Quantity UoM',
@@ -69,8 +69,8 @@ export const TradesPanel = (props: TradesPanelProps) => {
       </StyledTitle>
       <NominationPlanner
         headers={headers}
-        openCommitments={openCommitments}
-        openCommitmentsHeader={openCommitmentsHeader} />
+        subHeaders={subHeaders}
+        openCommitments={openCommitments} />
       <StyledTitle>
         Stocks
       </StyledTitle>
