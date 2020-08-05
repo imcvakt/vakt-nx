@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
+import { PrivateRoute } from './private-route';
 
-import {LogisticsProvider} from '@vakt-web/logistics/data-access';
+import { LogisticsProvider } from '@vakt-web/logistics/data-access';
 
 const LogisticsFeatureOpenCommitment = lazy(
   () => import('@vakt-web/logistics/feature-open-commitment')
@@ -27,7 +28,7 @@ export const Routes = (props: RoutesProps) => {
     <Suspense fallback={<div>Loading...</div>}>
       <Route path="/" exact component={() => <><h1>Home</h1><p>Do something cool here :)</p></>} />
       <LogisticsProvider>
-        <Route path="/logistics-home" component={LogisticsFeatureOpenCommitment} />
+        <PrivateRoute path="/logistics-home" component={LogisticsFeatureOpenCommitment} />
         <Route path="/logistics-movements" component={LogisticsFeatureMovement} />
         <Route path="/logistics-nominations" component={LogisticsFeaturePlanner} />
       </LogisticsProvider>

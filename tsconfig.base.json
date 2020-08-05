@@ -30,7 +30,8 @@
         "libs/logistics/feature-open-commitment/src/index.ts"
       ],
       "@vakt-web/shared/assets": ["libs/shared/assets/src/index.ts"],
-      "@vakt-web/logistics/ui": ["libs/logistics/ui/src/index.ts"]
+      "@vakt-web/logistics/ui": ["libs/logistics/ui/src/index.ts"],
+      "@vakt-web/shared/util": ["libs/shared/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

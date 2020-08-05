@@ -73,10 +73,7 @@
               "apps/commodity/tsconfig.app.json",
               "apps/commodity/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/commodity/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/commodity/**/*"]
           }
         },
         "test": {
@@ -111,13 +108,8 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "tsConfig": [
-              "apps/commodity-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/commodity-e2e/**/*"
-            ]
+            "tsConfig": ["apps/commodity-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/commodity-e2e/**/*"]
           }
         }
       }
@@ -136,10 +128,7 @@
               "libs/shared/ui/tsconfig.lib.json",
               "libs/shared/ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/ui/**/*"]
           }
         },
         "test": {
@@ -349,10 +338,7 @@
               "libs/shared/assets/tsconfig.lib.json",
               "libs/shared/assets/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/assets/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/assets/**/*"]
           }
         },
         "test": {
@@ -379,10 +365,7 @@
               "libs/logistics/ui/tsconfig.lib.json",
               "libs/logistics/ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/logistics/ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/logistics/ui/**/*"]
           }
         },
         "test": {
@@ -446,13 +429,35 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
+            "tsConfig": ["apps/logistics-ui-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/logistics-ui-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "shared-util": {
+      "root": "libs/shared/util",
+      "sourceRoot": "libs/shared/util/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
             "tsConfig": [
-              "apps/logistics-ui-e2e/tsconfig.e2e.json"
+              "libs/shared/util/tsconfig.lib.json",
+              "libs/shared/util/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/logistics-ui-e2e/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/util/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/util/jest.config.js",
+            "tsConfig": "libs/shared/util/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }

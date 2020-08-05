@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '@vakt-web/shared/util';
 
 import styled from 'styled-components';
 
@@ -36,6 +37,8 @@ const Text = styled.div`
 `;
 
 export const Header = (props: HeaderProps) => {
+  const { signOut } = useAuth();
+
   return (
     <header>
       <Content>
@@ -44,7 +47,7 @@ export const Header = (props: HeaderProps) => {
           <img src="assets/reload.svg" width={24} height={24} alt="Resync data" />
           <img src="assets/notification.svg" width={24} height={24} alt="Resync data" />
           <User>
-            <Text>Anne Marie</Text>
+            <Text onClick={signOut}>Anne Marie</Text>
             <img src="assets/user-avatar.png" width={50} height={50} alt="User Avatar" />
             <img src="assets/menu.svg" width={24} height={24} alt="Resync data" />
           </User>
