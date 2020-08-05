@@ -30,6 +30,7 @@
     "axios": "^0.19.2",
     "document-register-element": "1.13.1",
     "express": "4.17.1",
+    "keycloak-js": "^11.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-is": "16.13.1",
