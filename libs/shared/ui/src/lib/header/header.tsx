@@ -43,6 +43,7 @@ export const Header = (props: HeaderProps) => {
     <header>
       <Content>
         <img src="assets/logo.svg" width={140} height={55} alt="VAKT Logo" />
+        {process.env.NODE_ENV === 'development' && 'Development'}
         <Actions>
           <img src="assets/reload.svg" width={24} height={24} alt="Resync data" />
           <img src="assets/notification.svg" width={24} height={24} alt="Resync data" />

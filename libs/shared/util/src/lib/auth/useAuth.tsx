@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
-import {keycloak} from './config';
+import React, { createContext, useMemo, useCallback, useState, useContext, useEffect } from 'react';
+import keycloak from 'keycloak-js';
 
 interface Credentials {
   subject: any
@@ -28,22 +28,26 @@ export function useAuth(): AuthContextData {
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [authData, setAuthData] = useState<AuthState>({} as AuthState);
+  const kc = useMemo(
+    () => keycloak({ clientId: process.env.NX_KEYCLOAK_CLIENT_ID, realm: process.env.NX_KEYCLOAK_REALM, url: process.env.NX_KEYCLOAK_URL })
+  , []);
 
   useEffect(() => {
-    keycloak.init({
-      onLoad: 'login-required',
-      flow: 'standard',
-      checkLoginIframe: false
-    }).then(async authenticated => {
-      if (authenticated) {
-        // window.sessionStorage.setItem('privilege', keycloak.token);
-        setAuthData({ user: { subject: keycloak.subject }, token: keycloak.token});
-      }
-    }).catch(async error => {
-      alert(`Error to login ${JSON.stringify(error)}`);
-    });
-    setAuthData({} as AuthState);
-  }, []);
+    if(process.env.NODE_ENV){
+      kc.init({
+        onLoad: 'login-required',
+        flow: 'standard',
+        checkLoginIframe: false
+      }).then(async authenticated => {
+        if (authenticated) {
+          setAuthData({ user: { subject: kc.subject }, token: kc.token});
+        }
+      }).catch(async error => {
+        alert(`Error to login ${JSON.stringify(error)}`);
+      });
+    }
+    setAuthData({user: { subject: 'fake_token' }} as AuthState);
+  }, [kc]);
 
   const signIn = useCallback(
     async ({ email, password }) => {
@@ -53,8 +57,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(async () => {
     console.log('signOut');
-    keycloak.logout();
-  }, []);
+    kc.logout();
+  }, [kc]);
 
   return (
     <AuthContext.Provider value={{ user: authData.user, signIn, signOut }}>
