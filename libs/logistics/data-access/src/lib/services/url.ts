@@ -2,5 +2,6 @@ export const URL = {
   movements: 'movements',
   buildDraws: 'build-draws',
   nominations: 'nominations',
-  openCommitments: 'open-commitments'
+  openCommitments: 'open-commitments',
+  subscriptions: 'subscriptions'
 }

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Stack, IStackTokens, IStackItemStyles } from '@fluentui/react/lib/Stack';
-import { DefaultPalette } from '@fluentui/react/lib/Styling';
+import React from 'react';
+
+import { useFetch, URL } from "@vakt-web/logistics/data-access";
+
+import { Stack, IStackTokens } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
-import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
-import { SelectionMode } from '@fluentui/react';
+import { DetailsList, SelectionMode } from '@fluentui/react/lib/DetailsList';
+import { IColumn, Checkbox, CommandBar, ICommandBarItemProps } from '@fluentui/react';
 
 /* eslint-disable-next-line */
 export interface NotificationsFeatureSettingsProps {}
@@ -11,52 +13,65 @@ export interface NotificationsFeatureSettingsProps {}
 export const NotificationsFeatureSettings = (
   props: NotificationsFeatureSettingsProps
 ) => {
-  const stackTokens: IStackTokens = { childrenGap: 20 };
-  const stackStyles: IStackItemStyles = {
-    root: {
-      boxShadow: `0px 0px 3px 3px ${DefaultPalette.neutralQuaternaryAlt}`
-    },
-  };
-  const stackItemStyles: IStackItemStyles = {
-    root: {
-      background: DefaultPalette.neutralQuaternaryAlt,
-      color: DefaultPalette.white,
-    },
-  };
+  const stackTokens: IStackTokens = {  };
 
-  const items = [
-    { key: 1, event: 'Send Nomination', enabled: true, modifiedBy: 'Shell'},
-    { key: 1, event: 'Reject Nomination', enabled: false, modifiedBy: ''},
-    { key: 1, event: 'Cancel Nomination', enabled: false, modifiedBy: ''},
-    { key: 1, event: 'Receive Nomination', enabled: true, modifiedBy: 'Shell'},
-    { key: 1, event: 'Reply Nomination', enabled: false, modifiedBy: 'Shell'}
-  ];
+  const { data } = useFetch<[]>(URL.subscriptions);
 
   const columns = [
-    { key: 'column1', name: 'Events', fieldName: 'event', minWidth: 100, maxWidth: 200, isResizable: true },
-    { key: 'column2', name: 'Is Enabled?', fieldName: 'enabled', minWidth: 100, maxWidth: 200, isResizable: true },
-    { key: 'column3', name: 'Modified By', fieldName: 'modifiedBy', minWidth: 100, maxWidth: 200, isResizable: true },
+    { key: 'column1', name: 'Events', fieldName: 'eventName', minWidth: 100, maxWidth: 200, isResizable: true },
+    { key: 'column2', name: 'MOBILE', fieldName: 'isMobileActive', minWidth: 100, maxWidth: 200, isResizable: true },
+    { key: 'column3', name: 'WEB', fieldName: 'isWebActive', minWidth: 100, maxWidth: 200, isResizable: true }
   ];
 
-  const [shimmer, setShimmer] = useState(true);
-  useEffect(() => {
-    setTimeout( () =>  setShimmer(false), 1000);
-  }, [])
+  const groups = [
+    { key: 'crude', name: 'Crude', startIndex: 0, count: 2, level: 0 },
+    { key: 'others', name: 'Others', startIndex: 2, count: 1, level: 0 },
+  ]
 
+  function _renderItemColumn(item: any, index: number, column: IColumn) {
+    const fieldContent = item[column.fieldName
+      // as keyof Subscription
+    ] as string;
+
+    switch (column.key) {
+      case 'column3':
+        return <Checkbox onChange={() => {
+          console.log(1)
+        }} />;
+      case 'column2':
+        return <Checkbox onChange={() => {
+          console.log(2)
+        }} />;
+
+      default:
+        return <span>{fieldContent}</span>;
+    }
+  };
+
+  const _items: ICommandBarItemProps[] = [
+    { key: 'newItem', text: 'New', iconProps: { iconName: 'Add' }, onClick: () => console.log('New') },
+  ]
+
+  if(!data){
+    return <div>Oi</div>
+  }
 
   return (
-    <Stack styles={stackStyles} tokens={stackTokens}>
-      <Stack.Item styles={stackItemStyles}>
-        <Text>Subscriptions</Text>
+    <Stack tokens={stackTokens}>
+      <Stack.Item>
+        <CommandBar
+          items={_items}
+          ariaLabel="Use left and right arrow keys to navigate between commands"
+        />
       </Stack.Item>
-      <Stack.Item styles={stackItemStyles}>
-        <ShimmeredDetailsList
+      <Stack.Item>
+        <DetailsList
           setKey="items"
-          items={items}
+          items={data}
           columns={columns}
-          enableShimmer={shimmer}
+          groups={groups}
+          onRenderItemColumn={_renderItemColumn}
           selectionMode={SelectionMode.none}
-          ariaLabelForShimmer="Content is being fetched"
           ariaLabelForGrid="Permissions details"
         />
       </Stack.Item>

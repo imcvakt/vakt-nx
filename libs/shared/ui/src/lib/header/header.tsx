@@ -3,7 +3,7 @@ import React from 'react';
 import { useAuth } from '@vakt-web/shared/util';
 import Menu from '../menu/menu';
 
-import { IPersonaSharedProps, Persona, PersonaSize } from '@fluentui/react/lib/Persona';
+import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { Stack } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 
@@ -12,13 +12,6 @@ export interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
   const { signOut } = useAuth();
-
-  const examplePersona: IPersonaSharedProps = {
-    // imageUrl: TestImages.personaFemale,
-    imageInitials: 'BG',
-    text: 'Barges User',
-    secondaryText: 'Shell',
-  };
 
   return (
     <header>
@@ -32,7 +25,9 @@ export const Header = (props: HeaderProps) => {
           <img src="assets/reload.svg" width={24} height={24} alt="Resync data" />
           <img src="assets/notification.svg" width={24} height={24} alt="Resync data" />
           <Persona
-            {...examplePersona}
+            imageInitials="BG"
+            text="Barges User"
+            secondaryText="Shell"
             size={PersonaSize.size40}
             imageAlt="Annie Lindqvist, no presence detected"
             onClick={signOut}
