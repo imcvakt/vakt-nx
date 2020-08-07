@@ -1,52 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import styled from 'styled-components';
 
 import { Header, Footer } from '@vakt-web/shared/ui';
 
+import { Customizations, Fabric, Stack } from '@fluentui/react';
+import { initializeIcons } from '@uifabric/icons';
+import { darkTheme } from './styles/global';
+
 import { Routes } from './routes/routes';
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  padding: 0px 32px 0px 32px;
-
-  nav {
-    padding-bottom: 16px;
-    a {
-      margin-right: 8px;
-    }
-  }
-`;
+initializeIcons();
 
 export const App = () => {
+  Customizations.applySettings({ theme: darkTheme });
   return (
-    <>
-      <Header />
-
-      <Content>
-        <nav>
-          <Link to="/">
-            <button style={{ border: 'none', color: '#FFF', width: '129px', height: '41px', background: '#399BF8'}}>
-              Home
-            </button>
-          </Link>
-          <Link to="logistics-home">
-            <button style={{ border: 'none', color: '#FFF', width: '129px', height: '41px', background: '#399BF8'}}>
-              Logistics
-            </button>
-          </Link>
-        </nav>
-        <Routes />
-      </Content>
-
-      <Footer>
-        <p>VAKT Global Ltd</p>
-      </Footer>
-    </>
+    <Fabric applyThemeToBody>
+      <Stack tokens={{childrenGap: 8}}>
+        <Header />
+        {/* TODO: full height with stack */}
+        <div style={{height: '100vh'}}>
+          <Stack tokens={{ padding: '0px 16px 0px 16px' }}>
+            <Routes />
+          </Stack>
+        </div>
+        <Footer>
+          <p>VAKT Global Ltd</p>
+        </Footer>
+      </Stack>
+    </Fabric>
   );
 };
 

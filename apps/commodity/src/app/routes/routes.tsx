@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
-import { Route } from 'react-router-dom';
 import { PrivateRoute } from './private-route';
+
+import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 
 import { LogisticsProvider } from '@vakt-web/logistics/data-access';
 
@@ -20,18 +21,25 @@ const LogisticsFeatureMovement = lazy(
       ({ default: LogisticsFeatureMovement }))
 );
 
+const NotificationsFeatureSettings = lazy(
+  () => import('@vakt-web/notifications-settings')
+    .then(({ NotificationsFeatureSettings }) =>
+      ({ default: NotificationsFeatureSettings }))
+);
+
 /* eslint-disable-next-line */
 export interface RoutesProps {}
 
 export const Routes = (props: RoutesProps) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Route path="/" exact component={() => <><h1>Home</h1><p>Do something cool here :)</p></>} />
+    <Suspense fallback={<Spinner label="Navigating..." ariaLive="assertive" size={SpinnerSize.large} />}>
+      <PrivateRoute path="/" exact component={() => <><p>Home</p><p>Do something cool here :)</p></>} />
       <LogisticsProvider>
         <PrivateRoute path="/logistics-home" component={LogisticsFeatureOpenCommitment} />
-        <Route path="/logistics-movements" component={LogisticsFeatureMovement} />
-        <Route path="/logistics-nominations" component={LogisticsFeaturePlanner} />
+        <PrivateRoute path="/logistics-movements" component={LogisticsFeatureMovement} />
+        <PrivateRoute path="/logistics-nominations" component={LogisticsFeaturePlanner} />
       </LogisticsProvider>
+      <PrivateRoute path="/notifications-settings" exact component={NotificationsFeatureSettings} />
     </Suspense>
   );
 };

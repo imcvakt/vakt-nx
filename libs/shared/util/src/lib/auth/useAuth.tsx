@@ -27,7 +27,7 @@ export function useAuth(): AuthContextData {
 }
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [authData, setAuthData] = useState<AuthState>({} as AuthState);
+  const [authData, setAuthData] = useState<AuthState>({ user: {subject: 'fake_token'}} as AuthState);
   const kc = useMemo(
     () => keycloak({ clientId: process.env.NX_KEYCLOAK_CLIENT_ID, realm: process.env.NX_KEYCLOAK_REALM, url: process.env.NX_KEYCLOAK_URL })
   , []);
