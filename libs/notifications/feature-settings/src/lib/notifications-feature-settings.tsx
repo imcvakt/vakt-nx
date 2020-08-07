@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, IStackTokens, IStackItemStyles } from '@fluentui/react/lib/Stack';
-import {  } from '@fluentui/react/lib/Styling';
+import { DefaultPalette } from '@fluentui/react/lib/Styling';
 import { Text } from '@fluentui/react/lib/Text';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SelectionMode } from '@fluentui/react';
@@ -14,7 +14,13 @@ export const NotificationsFeatureSettings = (
   const stackTokens: IStackTokens = { childrenGap: 20 };
   const stackStyles: IStackItemStyles = {
     root: {
-      boxShadow: `0px 0px 3px 3px red`
+      boxShadow: `0px 0px 3px 3px ${DefaultPalette.neutralQuaternaryAlt}`
+    },
+  };
+  const stackItemStyles: IStackItemStyles = {
+    root: {
+      background: DefaultPalette.neutralQuaternaryAlt,
+      color: DefaultPalette.white,
     },
   };
 
@@ -40,10 +46,10 @@ export const NotificationsFeatureSettings = (
 
   return (
     <Stack styles={stackStyles} tokens={stackTokens}>
-      <Stack.Item>
+      <Stack.Item styles={stackItemStyles}>
         <Text>Subscriptions</Text>
       </Stack.Item>
-      <Stack.Item>
+      <Stack.Item styles={stackItemStyles}>
         <ShimmeredDetailsList
           setKey="items"
           items={items}
