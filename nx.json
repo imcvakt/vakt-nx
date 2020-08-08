@@ -68,7 +68,7 @@
     "shared-util": {
       "tags": ["scope:util"]
     },
-    "notifications-feature-settings": {
+    "notifications-feature-subscriptions": {
       "tags": ["scope:feature"]
     }
   }

@@ -462,9 +462,9 @@
         }
       }
     },
-    "notifications-feature-settings": {
-      "root": "libs/notifications/feature-settings",
-      "sourceRoot": "libs/notifications/feature-settings/src",
+    "notifications-feature-subscriptions": {
+      "root": "libs/notifications/feature-subscriptions",
+      "sourceRoot": "libs/notifications/feature-subscriptions/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -473,22 +473,22 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/notifications/feature-settings/tsconfig.lib.json",
-              "libs/notifications/feature-settings/tsconfig.spec.json"
+              "libs/notifications/feature-subscriptions/tsconfig.lib.json",
+              "libs/notifications/feature-subscriptions/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**",
-              "!libs/notifications/feature-settings/**/*"
+              "!libs/notifications/feature-subscriptions/**/*"
             ]
           }
         },
         "build": {
           "builder": "@nrwl/web:package",
           "options": {
-            "outputPath": "dist/libs/notifications/feature-settings",
-            "tsConfig": "libs/notifications/feature-settings/tsconfig.lib.json",
-            "project": "libs/notifications/feature-settings/package.json",
-            "entryFile": "libs/notifications/feature-settings/src/index.ts",
+            "outputPath": "dist/libs/notifications/feature-subscriptions",
+            "tsConfig": "libs/notifications/feature-subscriptions/tsconfig.lib.json",
+            "project": "libs/notifications/feature-subscriptions/package.json",
+            "entryFile": "libs/notifications/feature-subscriptions/src/index.ts",
             "external": ["react", "react-dom", "react-is", "styled-components"],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
@@ -504,8 +504,8 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/notifications/feature-settings/jest.config.js",
-            "tsConfig": "libs/notifications/feature-settings/tsconfig.spec.json",
+            "jestConfig": "libs/notifications/feature-subscriptions/jest.config.js",
+            "tsConfig": "libs/notifications/feature-subscriptions/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

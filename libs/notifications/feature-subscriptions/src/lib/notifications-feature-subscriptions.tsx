@@ -8,10 +8,10 @@ import { DetailsList, SelectionMode } from '@fluentui/react/lib/DetailsList';
 import { IColumn, Checkbox, CommandBar, ICommandBarItemProps } from '@fluentui/react';
 
 /* eslint-disable-next-line */
-export interface NotificationsFeatureSettingsProps {}
+export interface NotificationsFeatureSubscriptionsProps {}
 
-export const NotificationsFeatureSettings = (
-  props: NotificationsFeatureSettingsProps
+export const NotificationsFeatureSubscriptions = (
+  props: NotificationsFeatureSubscriptionsProps
 ) => {
   const stackTokens: IStackTokens = {  };
 
@@ -79,4 +79,4 @@ export const NotificationsFeatureSettings = (
   );
 };
 
-export default NotificationsFeatureSettings;
+export default NotificationsFeatureSubscriptions;

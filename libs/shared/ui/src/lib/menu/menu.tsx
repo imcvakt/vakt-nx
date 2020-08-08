@@ -40,7 +40,7 @@ export const Menu = (props: MenuProps) => {
         {
           key: 'Notifications',
           name: 'Notifications',
-          url: '/notifications-settings',
+          url: '/notifications-subscriptions',
         },
       ],
     }

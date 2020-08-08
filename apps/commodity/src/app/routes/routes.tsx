@@ -21,10 +21,10 @@ const LogisticsFeatureMovement = lazy(
       ({ default: LogisticsFeatureMovement }))
 );
 
-const NotificationsFeatureSettings = lazy(
-  () => import('@vakt-web/notifications-settings')
-    .then(({ NotificationsFeatureSettings }) =>
-      ({ default: NotificationsFeatureSettings }))
+const NotificationsFeatureSubscriptions = lazy(
+  () => import('@vakt-web/notifications/feature-subscriptions')
+    .then(({ NotificationsFeatureSubscriptions }) =>
+      ({ default: NotificationsFeatureSubscriptions }))
 );
 
 /* eslint-disable-next-line */
@@ -39,7 +39,7 @@ export const Routes = (props: RoutesProps) => {
         <PrivateRoute path="/logistics-movements" component={LogisticsFeatureMovement} />
         <PrivateRoute path="/logistics-nominations" component={LogisticsFeaturePlanner} />
       </LogisticsProvider>
-      <PrivateRoute path="/notifications-settings" exact component={NotificationsFeatureSettings} />
+      <PrivateRoute path="/notifications-subscriptions" exact component={NotificationsFeatureSubscriptions} />
     </Suspense>
   );
 };
