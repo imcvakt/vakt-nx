@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'notifications-feature-subscriptions',
+  name: 'notifications-feature-subscription',
   preset: '../../../jest.config.js',
   transform: {
     '^.+\\.[tj]sx?$': [
@@ -9,5 +9,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
   coverageDirectory:
-    '../../../coverage/libs/notifications/feature-subscriptions',
+    '../../../coverage/libs/notifications/feature-subscription',
 };

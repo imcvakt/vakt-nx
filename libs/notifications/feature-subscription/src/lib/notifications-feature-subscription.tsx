@@ -3,15 +3,14 @@ import React from 'react';
 import { useFetch, URL } from "@vakt-web/logistics/data-access";
 
 import { Stack, IStackTokens } from '@fluentui/react/lib/Stack';
-import { Text } from '@fluentui/react/lib/Text';
 import { DetailsList, SelectionMode } from '@fluentui/react/lib/DetailsList';
 import { IColumn, Checkbox, CommandBar, ICommandBarItemProps } from '@fluentui/react';
 
 /* eslint-disable-next-line */
-export interface NotificationsFeatureSubscriptionsProps {}
+export interface NotificationsFeatureSubscriptionProps {}
 
-export const NotificationsFeatureSubscriptions = (
-  props: NotificationsFeatureSubscriptionsProps
+export const NotificationsFeatureSubscription = (
+  props: NotificationsFeatureSubscriptionProps
 ) => {
   const stackTokens: IStackTokens = {  };
 
@@ -49,7 +48,7 @@ export const NotificationsFeatureSubscriptions = (
   };
 
   const _items: ICommandBarItemProps[] = [
-    { key: 'newItem', text: 'New', iconProps: { iconName: 'Add' }, onClick: () => console.log('New') },
+    { key: 'newItem', text: 'New', iconProps: { iconName: 'Add' }, onClick: () => console.log('New 1') },
   ]
 
   if(!data){
@@ -79,4 +78,4 @@ export const NotificationsFeatureSubscriptions = (
   );
 };
 
-export default NotificationsFeatureSubscriptions;
+export default NotificationsFeatureSubscription;

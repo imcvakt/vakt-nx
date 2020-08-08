@@ -13,7 +13,7 @@ export const Menu = (props: MenuProps) => {
   const dismissPanel = useCallback(() => setIsOpen(false), []);
   const collapseMenu: IIconProps = { iconName: 'CollapseMenu' };
 
-  const navStyles: Partial<INavStyles> = { root: { width: 300 } };
+  const navStyles: Partial<INavStyles> = { root: { } };
   const navLinkGroups: INavLinkGroup[] = [
     {
       name: 'Logistics',
@@ -40,7 +40,7 @@ export const Menu = (props: MenuProps) => {
         {
           key: 'Notifications',
           name: 'Notifications',
-          url: '/notifications-subscriptions',
+          url: '/notifications-subscription',
         },
       ],
     }

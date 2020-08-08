@@ -453,7 +453,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nrwl/jest:jest", 
           "options": {
             "jestConfig": "libs/shared/util/jest.config.js",
             "tsConfig": "libs/shared/util/tsconfig.spec.json",
@@ -462,9 +462,9 @@
         }
       }
     },
-    "notifications-feature-subscriptions": {
-      "root": "libs/notifications/feature-subscriptions",
-      "sourceRoot": "libs/notifications/feature-subscriptions/src",
+    "notifications-feature-subscription": {
+      "root": "libs/notifications/feature-subscription",
+      "sourceRoot": "libs/notifications/feature-subscription/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -473,39 +473,20 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/notifications/feature-subscriptions/tsconfig.lib.json",
-              "libs/notifications/feature-subscriptions/tsconfig.spec.json"
+              "libs/notifications/feature-subscription/tsconfig.lib.json",
+              "libs/notifications/feature-subscription/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**",
-              "!libs/notifications/feature-subscriptions/**/*"
-            ]
-          }
-        },
-        "build": {
-          "builder": "@nrwl/web:package",
-          "options": {
-            "outputPath": "dist/libs/notifications/feature-subscriptions",
-            "tsConfig": "libs/notifications/feature-subscriptions/tsconfig.lib.json",
-            "project": "libs/notifications/feature-subscriptions/package.json",
-            "entryFile": "libs/notifications/feature-subscriptions/src/index.ts",
-            "external": ["react", "react-dom", "react-is", "styled-components"],
-            "babelConfig": "@nrwl/react/plugins/bundle-babel",
-            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-            "assets": [
-              {
-                "glob": "README.md",
-                "input": ".",
-                "output": "."
-              }
+              "!libs/notifications/feature-subscription/**/*"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/notifications/feature-subscriptions/jest.config.js",
-            "tsConfig": "libs/notifications/feature-subscriptions/tsconfig.spec.json",
+            "jestConfig": "libs/notifications/feature-subscription/jest.config.js",
+            "tsConfig": "libs/notifications/feature-subscription/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

@@ -32,8 +32,8 @@
       "@vakt-web/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@vakt-web/logistics/ui": ["libs/logistics/ui/src/index.ts"],
       "@vakt-web/shared/util": ["libs/shared/util/src/index.ts"],
-      "@vakt-web/notifications/feature-subscriptions": [
-        "libs/notifications/feature-subscriptions/src/index.ts"
+      "@vakt-web/notifications/feature-subscription": [
+        "libs/notifications/feature-subscription/src/index.ts"
       ]
     }
   },
