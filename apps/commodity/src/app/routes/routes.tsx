@@ -28,7 +28,7 @@ export interface RoutesProps {}
 export const Routes = (props: RoutesProps) => {
   return (
     <Suspense fallback={<Spinner label="Navigating..." ariaLive="assertive" size={SpinnerSize.large} />}>
-      <PrivateRoute path="/" exact component={() => <><p>Home</p><p>Do something cool here :)</p></>} />
+      <PrivateRoute path="/" exact component={LogisticsFeatureOpenCommitment} />
       <OpenCommitmentProvider>
         <PrivateRoute path="/logistics-home" component={LogisticsFeatureOpenCommitment} /> 
       </OpenCommitmentProvider>
