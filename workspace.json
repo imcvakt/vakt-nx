@@ -453,7 +453,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest", 
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared/util/jest.config.js",
             "tsConfig": "libs/shared/util/tsconfig.spec.json",
@@ -487,6 +487,62 @@
           "options": {
             "jestConfig": "libs/notifications/feature-subscription/jest.config.js",
             "tsConfig": "libs/notifications/feature-subscription/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nominations-api": {
+      "root": "apps/nominations-api",
+      "sourceRoot": "apps/nominations-api/src",
+      "projectType": "application",
+      "prefix": "nominations-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/nominations-api",
+            "main": "apps/nominations-api/src/main.ts",
+            "tsConfig": "apps/nominations-api/tsconfig.app.json",
+            "assets": ["apps/nominations-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nominations-api/src/environments/environment.ts",
+                  "with": "apps/nominations-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "nominations-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/nominations-api/tsconfig.app.json",
+              "apps/nominations-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/nominations-api/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nominations-api/jest.config.js",
+            "tsConfig": "apps/nominations-api/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

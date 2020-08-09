@@ -70,6 +70,9 @@
     },
     "notifications-feature-subscription": {
       "tags": ["scope:feature"]
+    },
+    "nominations-api": {
+      "tags": ["scope:project"]
     }
   }
 }
