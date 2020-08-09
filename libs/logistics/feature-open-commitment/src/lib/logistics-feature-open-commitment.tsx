@@ -1,14 +1,15 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useMemo, useState } from 'react'; 
 
-import { Shimmer, ShimmerElementType } from '@fluentui/react/lib/Shimmer';
-import { Fabric } from '@fluentui/react/lib/Fabric';
-import { mergeStyles } from '@fluentui/react/lib/Styling';
+import { LogisticsFeatureMovement } from '@vakt-web/logistics/feature-movement';
 
-import { Toolbar, Button } from '@vakt-web/shared/ui';
-import { OpenCommitment, useLogistics } from '@vakt-web/logistics/data-access';
+import { CustomShimmer, Toolbar } from '@vakt-web/shared/ui';
+import { OpenCommitment, useOpenCommitment } from '@vakt-web/logistics/data-access';
 import { useFetch, URL } from '@vakt-web/logistics/data-access';
 import { OpenCommitmentTable } from './open-commitment-table/open-commitment-table';
+
+import { Separator } from '@fluentui/react/lib/Separator';
+import { Stack } from '@fluentui/react/lib/Stack';
+import { CommandBar, ICommandBarItemProps, ICommandBarStyles } from '@fluentui/react/lib/CommandBar';
 
 /* eslint-disable-next-line */
 export interface LogisticsFeatureOpenCommitmentProps {}
@@ -16,51 +17,43 @@ export interface LogisticsFeatureOpenCommitmentProps {}
 export const LogisticsFeatureOpenCommitment = (
   props: LogisticsFeatureOpenCommitmentProps
 ) => {
-  const [state] = useLogistics();
-  const emptySelection = useMemo(() => !state.openCommitments.length, [state.openCommitments.length]);
   const { data } = useFetch<OpenCommitment[]>(URL.openCommitments);
+  const [state] = useOpenCommitment();
+  const emptySelection = useMemo(() => !state.selected.length, [state.selected.length]);
+  const [showMovementPlanner, setShowMovementPlanner] = useState(false);
 
-  const wrapperClass = mergeStyles({
-    padding: 2,
-    selectors: {
-      '& > .ms-Shimmer-container': {
-        margin: '10px 0',
-      },
-    },
-  });
-
-  const shimmerWithElementFirstRow = [
-    { type: ShimmerElementType.line },
-    { type: ShimmerElementType.gap, width: '2%' },
-    { type: ShimmerElementType.line },
-    { type: ShimmerElementType.gap, width: '2%' },
-    { type: ShimmerElementType.line },
-  ];
+  const items: ICommandBarItemProps[] = useMemo(() => ([
+    { key: 'newMovement', text: 'New Movement', iconProps: { iconName: 'Add' }, onClick: () => setShowMovementPlanner(true), disabled: emptySelection },
+  ]), [emptySelection]);
 
   if(!data) {
     return (
-      <Fabric className={wrapperClass}>
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-        <Shimmer shimmerElements={shimmerWithElementFirstRow} />
-      </Fabric>
+      <CustomShimmer />
     )
   }
 
   return (
-    <>
-      <Toolbar title="Open Commitments">
-        <Link to="logistics-movements">
-          <Button disabled={emptySelection}>
-            New Movement
-          </Button>
-        </Link>
-      </Toolbar>
-      <OpenCommitmentTable data={data} />
-    </>
+    <Stack>  
+      <Stack.Item> 
+        <Stack horizontal>  
+          <Stack.Item > 
+            <CommandBar 
+              items={items}
+              ariaLabel="Use left and right arrow keys to navigate between commands"
+            /> 
+          </Stack.Item>  
+       </Stack>
+      </Stack.Item>  
+      <Stack.Item>
+        <OpenCommitmentTable data={data} />
+      </Stack.Item>
+      <Stack.Item>
+        {showMovementPlanner && <Separator /> }
+      </Stack.Item>
+      <Stack.Item> 
+        {showMovementPlanner && <LogisticsFeatureMovement />}
+      </Stack.Item> 
+    </Stack>
   );
 };
 

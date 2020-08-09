@@ -1,1 +1,1 @@
-export * from './reducers/combined-reducers';
+export * from './open-commitment' 

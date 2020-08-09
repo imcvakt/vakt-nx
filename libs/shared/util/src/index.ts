@@ -1,1 +1,2 @@
-export * from './lib/auth/useAuth';
+export * from './lib/auth';
+export * from './lib/hooks';

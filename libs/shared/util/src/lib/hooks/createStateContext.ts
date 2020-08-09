@@ -1,6 +1,6 @@
 import { createElement, createContext, useContext, useState } from 'react';
 
-const createStateContext = <T>(defaultInitialValue: T) => {
+export const createStateContext = <T>(defaultInitialValue: T) => {
   const context = createContext<[T, React.Dispatch<React.SetStateAction<T>>] | undefined>(undefined);
   const providerFactory = (props, children) => createElement(context.Provider, props, children);
 
@@ -18,6 +18,4 @@ const createStateContext = <T>(defaultInitialValue: T) => {
   };
 
   return [useStateContext, StateProvider, context] as const;
-};
-
-export default createStateContext;
+}; 

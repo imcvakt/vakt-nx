@@ -1,6 +1,6 @@
 import { createElement, createContext, useContext, useReducer } from 'react';
 
-const createReducerContext = <R extends React.Reducer<any, any>>(
+export const createReducerContext = <R extends React.Reducer<any, any>>(
   reducer: R,
   defaultInitialState: React.ReducerState<R>
 ) => {
@@ -22,5 +22,4 @@ const createReducerContext = <R extends React.Reducer<any, any>>(
 
   return [useReducerContext, ReducerProvider, context] as const;
 };
-
-export default createReducerContext;
+ 

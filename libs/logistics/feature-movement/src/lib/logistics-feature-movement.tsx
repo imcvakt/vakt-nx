@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Toolbar, Button } from '@vakt-web/shared/ui';
 import MovementTable from './movement-table/movement-table';
-import { useLogistics } from '@vakt-web/logistics/data-access';
+import { useOpenCommitment } from '@vakt-web/logistics/data-access';
 
 /* eslint-disable-next-line */
 export interface LogisticsFeatureMovementProps {}
@@ -11,8 +11,8 @@ export interface LogisticsFeatureMovementProps {}
 export const LogisticsFeatureMovement = (
   props: LogisticsFeatureMovementProps
 ) => {
-  const [state] = useLogistics();
-  const emptySelection = useMemo(() => !state.openCommitments.length, [state.openCommitments.length]);
+  const [state] = useOpenCommitment();
+  const emptySelection = useMemo(() => !state.selected.length, [state.selected.length]);
   return (
     <>
       <Toolbar title="Movement">
