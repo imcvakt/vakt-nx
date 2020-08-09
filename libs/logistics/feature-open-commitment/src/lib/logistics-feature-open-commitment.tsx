@@ -10,6 +10,7 @@ import { OpenCommitmentTable } from './open-commitment-table/open-commitment-tab
 import { Separator } from '@fluentui/react/lib/Separator';
 import { Stack } from '@fluentui/react/lib/Stack';
 import { CommandBar, ICommandBarItemProps, ICommandBarStyles } from '@fluentui/react/lib/CommandBar';
+import { IButtonProps } from '@fluentui/react/lib/Button';
 
 /* eslint-disable-next-line */
 export interface LogisticsFeatureOpenCommitmentProps {}
@@ -18,27 +19,25 @@ export const LogisticsFeatureOpenCommitment = (
   props: LogisticsFeatureOpenCommitmentProps
 ) => {
   const { data } = useFetch<OpenCommitment[]>(URL.openCommitments);
-  const [state] = useOpenCommitment();
-  const emptySelection = useMemo(() => !state.selected.length, [state.selected.length]);
-  const [showMovementPlanner, setShowMovementPlanner] = useState(false);
-
+  const [state] = useOpenCommitment(); 
+  const [showMovementPlanner, setShowMovementPlanner] = useState(false);  
   const items: ICommandBarItemProps[] = useMemo(() => ([
-    { key: 'newMovement', text: 'New Movement', iconProps: { iconName: 'Add' }, onClick: () => setShowMovementPlanner(true), disabled: emptySelection },
-  ]), [emptySelection]);
+    { key: 'newMovement', text: 'New Movement', iconProps: { iconName: 'Add' }, onClick: () => setShowMovementPlanner(true), disabled: state.isEmpty, split: true }
+  ]), [state.isEmpty]);
 
   if(!data) {
     return (
       <CustomShimmer />
     )
-  }
+  };
 
   return (
-    <Stack>  
+    <Stack tokens={{ childrenGap: 8 }}>  
       <Stack.Item> 
         <Stack horizontal>  
-          <Stack.Item > 
+          <Stack.Item styles={{ root: { width: '100%'} }}> 
             <CommandBar 
-              items={items}
+              items={items}  
               ariaLabel="Use left and right arrow keys to navigate between commands"
             /> 
           </Stack.Item>  

@@ -6,20 +6,39 @@ type AddSelection = { type: 'AddSelection', payload: OpenCommitment }
 export type OpenCommitmentActions = RemoveSelection | AddSelection;
 
 // reducer
-export interface InitialStateType {
+export interface OpenCommitmentStateType {
   selected: OpenCommitment[];
+  isEmpty: boolean;
 };
 
-export const initialState: InitialStateType = {
+export const initialState: OpenCommitmentStateType = {
   selected: [],
+  isEmpty: true,
 };
 
-export const openCommitmentReducer = (state: InitialStateType, action: OpenCommitmentActions) => {
+const removeSelectionById = (currentSelection: OpenCommitment[], id: string) => {
+  const selected = currentSelection.filter(openCommitment => id !== openCommitment.id);
+  const isEmpty = selected.length === 0;
+
+  return {
+    selected,
+    isEmpty
+  }
+};
+
+const addSelection = (currentSelection: OpenCommitment[], newSelectedItem: OpenCommitment) => { 
+  return {
+    selected: [...currentSelection, newSelectedItem],
+    isEmpty: false
+  }
+};
+
+export const openCommitmentReducer = (state: OpenCommitmentStateType, action: OpenCommitmentActions): OpenCommitmentStateType => {
   switch (action.type) {
     case 'RemoveSelection':
-        return { selected: state.selected.filter(openCommitment => action.payload.id !== openCommitment.id)};
+        return removeSelectionById(state.selected, action.payload.id);
     case 'AddSelection':
-      return { selected: [...state.selected, action.payload] };
+      return addSelection(state.selected, action.payload);
     default:
       return state;
   }
