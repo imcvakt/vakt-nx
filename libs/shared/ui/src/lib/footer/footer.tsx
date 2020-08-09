@@ -12,7 +12,7 @@ const StyledFooter = styled.div`
   align-items: center;
 `;
 
-export const Footer = ({ children }: FooterProps) => {
+export const Footer = ({children}: FooterProps) => {
   return (
     <StyledFooter>
       {children}

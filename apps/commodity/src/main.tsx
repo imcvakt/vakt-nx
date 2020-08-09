@@ -5,13 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '@vakt-web/shared/util';
 import App from './app/app';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+ReactDOM.render( 
+  <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </BrowserRouter> 
+  ,
   document.getElementById('root')
 );

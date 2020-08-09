@@ -11,7 +11,7 @@ export interface OpenCommitmentStateType {
   isEmpty: boolean;
 };
 
-export const initialState: OpenCommitmentStateType = {
+export const openCommitmentInitialState: OpenCommitmentStateType = {
   selected: [],
   isEmpty: true,
 };

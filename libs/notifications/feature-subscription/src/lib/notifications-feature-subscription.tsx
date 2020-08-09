@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFetch, URL } from "@vakt-web/logistics/data-access";
+import { useFetch, URL, Subscription } from "@vakt-web/logistics/data-access";
 
 import { Stack, IStackTokens } from '@fluentui/react/lib/Stack';
 import { DetailsList, SelectionMode } from '@fluentui/react/lib/DetailsList';
@@ -27,10 +27,8 @@ export const NotificationsFeatureSubscription = (
     { key: 'others', name: 'Others', startIndex: 2, count: 1, level: 0 },
   ]
 
-  function _renderItemColumn(item: any, index: number, column: IColumn) {
-    const fieldContent = item[column.fieldName
-      // as keyof Subscription
-    ] as string;
+  function _renderItemColumn(item: Subscription[], index: number, column: IColumn) {
+    const fieldContent = item[column.fieldName as keyof Subscription] as string;
 
     switch (column.key) {
       case 'column3':

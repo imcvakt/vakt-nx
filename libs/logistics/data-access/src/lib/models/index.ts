@@ -5,3 +5,4 @@ export * from './movement';
 export * from './movement-transfer';
 export * from './nomination';
 export * from './open-commitment';
+export * from './subscription';

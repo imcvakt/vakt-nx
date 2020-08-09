@@ -1,32 +1,40 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-
-import { Toolbar, Button } from '@vakt-web/shared/ui';
+import React from 'react'; 
+import { useHistory } from "react-router-dom";
+import { withModal } from '@vakt-web/shared/ui';
+ 
 import MovementTable from './movement-table/movement-table';
 import { useOpenCommitment } from '@vakt-web/logistics/data-access';
+import { Stack } from '@fluentui/react/lib/Stack';
+import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 /* eslint-disable-next-line */
-export interface LogisticsFeatureMovementProps {}
+export interface LogisticsFeatureMovementProps {
+  toggleState: () => void,
+  isModalOpen: boolean,
+}
 
-export const LogisticsFeatureMovement = (
+export const LogisticsFeatureMovement = withModal((
   props: LogisticsFeatureMovementProps
 ) => {
-  const [state] = useOpenCommitment();
-  const emptySelection = useMemo(() => !state.selected.length, [state.selected.length]);
-  return (
-    <>
-      <Toolbar title="Movement">
-        <Link to="logistics-nominations">
-          <Button disabled={emptySelection}>
-            Manage Nomination
-          </Button>
-        </Link>
-      </Toolbar>
-
-      {emptySelection && <div style={{ color: '#FFF'}}>You have to select an open commitment to proceed.</div>}
-      {!emptySelection && <MovementTable />}
-    </>
+  let history = useHistory();
+  const [openCommitmentState] = useOpenCommitment(); 
+ 
+  return ( 
+    <Stack tokens={{ childrenGap: 8 }}>  
+      <Stack.Item>
+        {openCommitmentState.isEmpty ? <div style={{ color: '#FFF'}}>You have to select an open commitment to proceed.</div> : <MovementTable />}
+      </Stack.Item>  
+      <Stack.Item> 
+        <Stack horizontal styles={{ root: { display: 'flex', justifyContent: 'flex-end'} }}>  
+          <Stack.Item>  
+            <PrimaryButton onClick={() => {
+              history.push('/logistics-manage-nomination')
+            }}>
+              Manage Nomination
+            </PrimaryButton> 
+          </Stack.Item>  
+       </Stack>
+      </Stack.Item>   
+    </Stack> 
   );
-};
-
-export default LogisticsFeatureMovement;
+}); 

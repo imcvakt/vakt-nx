@@ -1,1 +1,2 @@
-export * from './open-commitment' 
+export * from './open-commitment';
+export * from './movement'; 

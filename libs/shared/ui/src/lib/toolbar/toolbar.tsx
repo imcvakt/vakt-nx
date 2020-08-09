@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react';
-
-import styled from 'styled-components';
 import { Stack, IStackStyles } from '@fluentui/react/lib/Stack';
 
 export interface ToolbarProps {
