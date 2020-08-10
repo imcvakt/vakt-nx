@@ -5,6 +5,8 @@ export interface ContractDetails {
   creator: string;
   product: Product;
   deliveryTerm: string;
+  quantity: number;
+  uom: string;
 }
 
 export interface OpenCommitment {

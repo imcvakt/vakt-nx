@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import { useMovement, ContractDetails } from '@vakt-web/logistics/data-access';
 
 import { NominationPlanner } from '@vakt-web/logistics/ui';
 import styled from 'styled-components';
@@ -18,6 +20,8 @@ const StyledTitle = styled.div`
 `;
 
 export const TradesPanel = (props: TradesPanelProps) => {
+  const [movementState, dispatch] = useMovement();
+
   const headers = [
     {item: 'Customer Trade', value: 'EL-94631-001'},
     {item: 'Counterparty Trade Creator', value: 'Gunvor SA'},
@@ -46,21 +50,13 @@ export const TradesPanel = (props: TradesPanelProps) => {
     ''
   ];
 
-  const openCommitments = [
-    [
-      'parcel',
-      'Gunvor SA',
-      '4000 MMT',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      ''
-    ]
-  ];
+  const openCommitments: string[][] = useMemo(() => {
+    const mapped = movementState.draftMovement.items.map(item => {
+      const { creator, product} = item.contractDetails;
+      return [ '', creator, product.name, '', '', '', '', '', '', '', '']
+    })
+    return mapped;
+  }, [movementState.draftMovement]);
 
   return (
     <>

@@ -10,13 +10,13 @@ const LogisticsFeatureOpenCommitment = lazy(
   () => import('@vakt-web/logistics/feature-open-commitment')
     .then(({ LogisticsFeatureOpenCommitment }) =>
       ({ default: LogisticsFeatureOpenCommitment }))
-); 
+);
 
 const LogisticsFeaturePlanner = lazy(
   () => import('@vakt-web/logistics/feature-planner')
     .then(({ LogisticsFeaturePlanner }) =>
       ({ default: LogisticsFeaturePlanner }))
-); 
+);
 
 const NotificationsFeatureSubscription = lazy(
   () => import('@vakt-web/notifications/feature-subscription')
@@ -33,10 +33,10 @@ export const Routes = (props: RoutesProps) => {
       <OpenCommitmentProvider>
         <MovementProvider>
           <PrivateRoute path="/" exact component={LogisticsFeatureOpenCommitment} />
-          <PrivateRoute path="/logistics-home" component={LogisticsFeatureOpenCommitment} /> 
+          <PrivateRoute path="/logistics-home" component={LogisticsFeatureOpenCommitment} />
+          <PrivateRoute path="/logistics-manage-nomination" component={LogisticsFeaturePlanner} />
         </MovementProvider>
       </OpenCommitmentProvider>
-      <PrivateRoute path="/logistics-manage-nomination" component={LogisticsFeaturePlanner} /> 
       <PrivateRoute path="/notifications-subscription" exact component={NotificationsFeatureSubscription} />
     </Suspense>
   );
