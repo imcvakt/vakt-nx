@@ -1,39 +1,56 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useHistory } from "react-router-dom";
 import { withModal } from '@vakt-web/shared/ui';
 
-import MovementTable from './movement-table/movement-table';
-import { useOpenCommitment } from '@vakt-web/logistics/data-access';
+import { Grid } from '@vakt-web/shared/ui';
+import { useOpenCommitment, useMovement } from '@vakt-web/logistics/data-access';
 import { Stack } from '@fluentui/react/lib/Stack';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
+import { CommandBar, ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
 
-export interface LogisticsFeatureMovementProps {
-  toggleState: () => void,
-  isModalOpen: boolean,
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface LogisticsFeatureMovementProps {}
 
-export const LogisticsFeatureMovement = withModal((
+export const LogisticsFeatureMovement = (
   props: LogisticsFeatureMovementProps
 ) => {
   const history = useHistory();
   const [openCommitmentState] = useOpenCommitment();
+  const [movementState] = useMovement();
+
+  const items: ICommandBarItemProps[] = useMemo(() => ([
+    { key: '1', text: 'Manage Nomination', iconProps: { iconName: 'Add' }, onClick: () => history.push('/logistics-manage-nomination'), disabled: openCommitmentState.isEmpty }
+  ]), [openCommitmentState, history]);
+
+  // create ag-Grid Column Definitions
+  const columnDefs = [
+    { headerName: "ID", field: "id", editable: false, filter: true, sortable: true, type: "abColDefString" },
+    { headerName: "Movement Transfer", field: "movementTransferId", editable: false, filter: true, sortable: true, type: "abColDefString"  },
+    { headerName: "Nomination", field: "nominationId", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "Customer Trade Id", field: "contractDetails.customerTradeId", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "Creator", field: "contractDetails.creator", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "Product", field: "contractDetails.product.name", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "Delivery Term", field: "contractDetails.deliveryTerm", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "Quantity", field: "contractDetails.quantity", editable: false, filter: true, sortable: true, type: "abColDefNumber" },
+    { headerName: "UoM", field: "contractDetails.uom", editable: false, filter: true, sortable: true, type: "abColDefNumber" }
+  ];
 
   return (
     <Stack tokens={{ childrenGap: 8 }}>
       <Stack.Item>
-        {openCommitmentState.isEmpty ? <div style={{ color: '#FFF'}}>You have to select an open commitment to proceed.</div> : <MovementTable />}
-      </Stack.Item>
-      <Stack.Item>
-        <Stack horizontal styles={{ root: { display: 'flex', justifyContent: 'flex-end'} }}>
-          <Stack.Item>
-            <PrimaryButton onClick={() => {
-              history.push('/logistics-manage-nomination')
-            }}>
-              Manage Nomination
-            </PrimaryButton>
+        <Stack horizontal>
+          <Stack.Item styles={{ root: { width: '100%'} }}>
+            <CommandBar
+              items={items}
+              ariaLabel="Use left and right arrow keys to navigate between commands"
+            />
           </Stack.Item>
        </Stack>
       </Stack.Item>
+      <Stack.Item>
+        {openCommitmentState.isEmpty ?
+          <div style={{ color: '#FFF'}}>You have to select an open commitment to proceed.</div> :
+          <Grid columnDefs={columnDefs} rowData={movementState.draftMovement.items} />}
+      </Stack.Item>
     </Stack>
   );
-});
+};

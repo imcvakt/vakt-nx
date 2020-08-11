@@ -27,6 +27,11 @@
   },
   "private": true,
   "dependencies": {
+    "@adaptabletools/adaptable": "^6.4.1",
+    "@adaptabletools/adaptable-react-aggrid": "^6.4.1",
+    "@ag-grid-community/all-modules": "^23.2.1",
+    "@ag-grid-community/react": "^23.2.1",
+    "@ag-grid-enterprise/all-modules": "^23.2.1",
     "@fluentui/react": "^7.126.1",
     "@uifabric/icons": "^7.3.69",
     "@uifabric/react-cards": "^0.110.17",

@@ -9,6 +9,7 @@ import { OpenCommitmentTable } from './open-commitment-table/open-commitment-tab
 
 import { Stack } from '@fluentui/react/lib/Stack';
 import { CommandBar, ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
+import { Panel, PanelType } from '@fluentui/react/lib/Panel';
 
 /* eslint-disable-next-line */
 export interface LogisticsFeatureOpenCommitmentProps {}
@@ -21,7 +22,7 @@ export const LogisticsFeatureOpenCommitment = (
   const [openCommitmentState] = useOpenCommitment();
   const [movementState, dispatch] = useMovement();
   const items: ICommandBarItemProps[] = useMemo(() => ([
-    { key: 'newMovement', text: 'New Movement', iconProps: { iconName: 'Add' }, onClick: () => dispatch({type: 'InitDraftMovement', payload: openCommitmentState.selected}), disabled: openCommitmentState.isEmpty }
+    { key: '1', text: 'New Movement', iconProps: { iconName: 'Add' }, onClick: () => dispatch({type: 'InitDraftMovement', payload: openCommitmentState.selected}), disabled: openCommitmentState.isEmpty }
   ]), [openCommitmentState, dispatch]);
 
   if(!data) {
@@ -29,8 +30,6 @@ export const LogisticsFeatureOpenCommitment = (
       <CustomShimmer />
     )
   };
-
-  console.log(movementState)
 
   return (
     <Stack tokens={{ childrenGap: 8 }}>
@@ -48,7 +47,18 @@ export const LogisticsFeatureOpenCommitment = (
         <OpenCommitmentTable data={data} />
       </Stack.Item>
       <Stack.Item>
-        <LogisticsFeatureMovement isModalOpen={movementState.isModalOpen} toggleState={() => dispatch({type: 'InitDraftMovement', payload: openCommitmentState.selected})} />
+        <Panel
+          headerText="Movement Planner"
+          isOpen={movementState.isModalOpen}
+          type={PanelType.large}
+          isBlocking={false}
+          onDismiss={() => dispatch({ type: 'ResetDraftMovement' })}
+          layerProps={{ styles: { root: { zIndex: 998 }}}}
+          // You MUST provide this prop! Otherwise screen readers will just say "button" with no label.
+          closeButtonAriaLabel="Close"
+        >
+          <LogisticsFeatureMovement />
+        </Panel>
       </Stack.Item>
     </Stack>
   );
