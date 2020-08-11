@@ -547,6 +547,36 @@
           }
         }
       }
+    },
+    "notifications-data-access": {
+      "root": "libs/notifications/data-access",
+      "sourceRoot": "libs/notifications/data-access/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/notifications/data-access/tsconfig.lib.json",
+              "libs/notifications/data-access/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/notifications/data-access/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/notifications/data-access/jest.config.js",
+            "tsConfig": "libs/notifications/data-access/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

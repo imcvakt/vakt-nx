@@ -73,6 +73,9 @@
     },
     "nominations-api": {
       "tags": ["scope:project"]
+    },
+    "notifications-data-access": {
+      "tags": ["scope:data-access"]
     }
   }
 }

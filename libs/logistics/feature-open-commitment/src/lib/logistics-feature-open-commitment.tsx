@@ -4,7 +4,7 @@ import { LogisticsFeatureMovement } from '@vakt-web/logistics/feature-movement';
 
 import { CustomShimmer } from '@vakt-web/shared/ui';
 import { OpenCommitment, useOpenCommitment, useMovement } from '@vakt-web/logistics/data-access';
-import { useFetch, URL } from '@vakt-web/logistics/data-access';
+import { useFetch, URL } from '@vakt-web/shared/util';
 import { OpenCommitmentTable } from './open-commitment-table/open-commitment-table';
 
 import { Stack } from '@fluentui/react/lib/Stack';

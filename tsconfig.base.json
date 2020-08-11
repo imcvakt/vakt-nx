@@ -34,6 +34,9 @@
       "@vakt-web/shared/util": ["libs/shared/util/src/index.ts"],
       "@vakt-web/notifications/feature-subscription": [
         "libs/notifications/feature-subscription/src/index.ts"
+      ],
+      "@vakt-web/notifications/data-access": [
+        "libs/notifications/data-access/src/index.ts"
       ]
     }
   },

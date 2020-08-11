@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { useFetch, URL, Subscription } from "@vakt-web/logistics/data-access";
+import { Subscription } from "@vakt-web/notifications/data-access";
+import { useFetch, URL } from "@vakt-web/shared/util";
 
 import { Stack, IStackTokens } from '@fluentui/react/lib/Stack';
 import { DetailsList, SelectionMode } from '@fluentui/react/lib/DetailsList';
