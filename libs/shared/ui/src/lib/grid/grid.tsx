@@ -16,7 +16,9 @@ import { useGrid } from './grid-config';
 LicenseManager.setLicenseKey("CompanyName=Vakt Global Limited,LicensedApplication=VAKT,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=5,LicensedProductionInstancesCount=1,AssetReference=AG-008165,ExpiryDate=22_May_2021_[v2]_MTYyMTYzODAwMDAwMA==177710523d6e6207c1afc12ad79488d2");
 
 interface GridProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columnDefs: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowData: any[];
 };
 

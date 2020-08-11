@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useMovement, ContractDetails } from '@vakt-web/logistics/data-access';
+import { useMovement } from '@vakt-web/logistics/data-access';
 
 import { NominationPlanner } from '@vakt-web/logistics/ui';
 import styled from 'styled-components';
@@ -20,7 +20,7 @@ const StyledTitle = styled.div`
 `;
 
 export const TradesPanel = (props: TradesPanelProps) => {
-  const [movementState, dispatch] = useMovement();
+  const [movementState] = useMovement();
 
   const headers = [
     {item: 'Customer Trade', value: 'EL-94631-001'},

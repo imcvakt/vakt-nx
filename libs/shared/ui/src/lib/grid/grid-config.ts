@@ -10,6 +10,7 @@ const demoConfig: PredefinedConfig = {
   },
 } as PredefinedConfig;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useGrid = (columnDefs: any[], rowData: any[]) => {
   const gridOptions: GridOptions = {
     columnDefs,

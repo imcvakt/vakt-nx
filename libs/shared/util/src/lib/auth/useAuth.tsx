@@ -1,7 +1,8 @@
-import React, { createContext, useMemo, useCallback, useState, useContext, useEffect } from 'react';
-import keycloak from 'keycloak-js';
+import React, { createContext, useCallback, useState, useContext } from 'react';
+// import keycloak from 'keycloak-js';
 
 interface Credentials {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   subject: any
 }
 
@@ -27,7 +28,7 @@ export function useAuth(): AuthContextData {
 }
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [authData, setAuthData] = useState<AuthState>({ user: {subject: 'fake_token'}} as AuthState);
+  const [authData, ] = useState<AuthState>({ user: {subject: 'fake_token'}} as AuthState);
   // const kc = useMemo(
   //   () => keycloak({ clientId: process.env.NX_KEYCLOAK_CLIENT_ID, realm: process.env.NX_KEYCLOAK_REALM, url: process.env.NX_KEYCLOAK_URL })
   // , []);

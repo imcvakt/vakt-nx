@@ -1,5 +1,6 @@
 import { createElement, createContext, useContext, useReducer } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createReducerContext = <R extends React.Reducer<any, any>>(
   reducer: R,
   defaultInitialState: React.ReducerState<R>
@@ -22,4 +23,4 @@ export const createReducerContext = <R extends React.Reducer<any, any>>(
 
   return [useReducerContext, ReducerProvider, context] as const;
 };
- 
+

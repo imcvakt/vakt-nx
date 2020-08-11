@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useHistory } from "react-router-dom";
-import { withModal } from '@vakt-web/shared/ui';
 
 import { Grid } from '@vakt-web/shared/ui';
 import { useOpenCommitment, useMovement } from '@vakt-web/logistics/data-access';
